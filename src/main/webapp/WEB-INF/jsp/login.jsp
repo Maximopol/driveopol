@@ -10,6 +10,7 @@
 
 <head>
     <title>First Web Application</title>
+    <link rel="shortcut icon" href="../others/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
