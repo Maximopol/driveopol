@@ -2,6 +2,7 @@ package com.maximopol.driveopol.controller;
 
 import com.maximopol.driveopol.entity.User;
 import com.maximopol.driveopol.service.UserService;
+import com.maximopol.driveopol.validator.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 
 @Controller
+
 public class RegistrationController {
 
     @Autowired
@@ -31,10 +33,15 @@ public class RegistrationController {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
+//        if(!EmailValidator.IsValidEmail(userForm.getUsername())){
+//            model.addAttribute("passwordError", "У тебя почта странная");
+//            return "registration";
+//        }
         if (!userForm.getPassword().equals(userForm.getPasswordConfirm())){
             model.addAttribute("passwordError", "Пароли не совпадают");
             return "registration";
         }
+
         if (!userService.saveUser(userForm)){
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
