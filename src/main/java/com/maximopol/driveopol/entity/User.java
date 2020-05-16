@@ -20,6 +20,12 @@ public class User implements UserDetails {
     private String password;
     @Transient
     private String passwordConfirm;
+
+//    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+//    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+//    @Enumerated(EnumType.STRING)
+//    private Set<Role> roles;
+//
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 

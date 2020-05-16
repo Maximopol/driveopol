@@ -13,13 +13,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
+/**
+ *
+ */
 @Controller
-
 public class RegistrationController {
 
     @Autowired
     private UserService userService;
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/registration")
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
@@ -27,6 +34,13 @@ public class RegistrationController {
         return "registration";
     }
 
+    /**
+     *
+     * @param userForm
+     * @param bindingResult
+     * @param model
+     * @return
+     */
     @PostMapping("/registration")
     public String addUser(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model) {
 

@@ -2,6 +2,7 @@ package com.maximopol.driveopol.controller;
 
 import com.maximopol.driveopol.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ public class TodoController {
     TodoService service;
 
     @RequestMapping(value="/list-todos", method = RequestMethod.GET)
+   // @PreAuthorize("hasRole('USER')")
     public String showTodos(ModelMap model){
         String name = (String) model.get("name");
         model.put("todos", service.retrieveTodos(name));
