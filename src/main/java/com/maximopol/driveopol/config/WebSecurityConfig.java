@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/disk", "/me", "/list-todos", "/welcome").access("hasRole('USER')")
                 .antMatchers("/", "/login", "/register").permitAll()
                 .and()
-                .exceptionHandling().accessDeniedPage("/403")
+                .exceptionHandling().accessDeniedPage("/error")
                 .and()
                 .formLogin()
                 .loginPage("/login")

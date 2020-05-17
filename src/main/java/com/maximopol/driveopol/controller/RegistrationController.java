@@ -1,8 +1,9 @@
 package com.maximopol.driveopol.controller;
 
+import com.maximopol.driveopol.entity.Client;
+import com.maximopol.driveopol.entity.Role;
 import com.maximopol.driveopol.entity.User;
 import com.maximopol.driveopol.service.UserService;
-import com.maximopol.driveopol.validator.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -23,7 +26,6 @@ public class RegistrationController {
     private UserService userService;
 
     /**
-     *
      * @param model
      * @return
      */
@@ -34,15 +36,10 @@ public class RegistrationController {
         return "registration";
     }
 
-    /**
-     *
-     * @param userForm
-     * @param bindingResult
-     * @param model
-     * @return
-     */
+
     @PostMapping("/registration")
-    public String addUser(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model) {
+    public String greetingSubmit(@ModelAttribute Client client, BindingResult bindingResult, Model model) {
+//    public String addUser(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             return "registration";
@@ -51,16 +48,34 @@ public class RegistrationController {
 //            model.addAttribute("passwordError", "У тебя почта странная");
 //            return "registration";
 //        }
-        if (!userForm.getPassword().equals(userForm.getPasswordConfirm())){
+//        if(!userForm.)
+
+
+        System.out.println(client.toString());
+
+
+        if (!client.getPassword().equals(client.getConfirmPassword())) {
             model.addAttribute("passwordError", "Пароли не совпадают");
             return "registration";
         }
+        System.out.println("Слава украины");
+        User user = new User();
+        user.setUsername(client.getEmail());
+        user.setPassword(client.getPassword());
+        user.setPasswordConfirm(client.getConfirmPassword());
+        Role role = new Role();
+        role.setName("USER");
+        HashSet<Role> set = new HashSet<>();
+        set.add(role);
 
-        if (!userService.saveUser(userForm)){
+        user.setRoles(set);
+        System.out.println("Лул");
+        if (!userService.saveUser(user)) {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+
             return "registration";
         }
-
+        System.out.println("ГЫЫЫЫЫЫЫЫ");
         return "redirect:/login";
     }
 }

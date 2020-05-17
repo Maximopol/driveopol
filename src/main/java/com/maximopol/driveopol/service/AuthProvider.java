@@ -15,45 +15,39 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 
 @Component
-public class AuthProvider implements AuthenticationProvider
-{
+public class AuthProvider implements AuthenticationProvider {
     @Autowired
     private UserService userService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException
-    {
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
-System.out.println(username+"=="+password);
+        System.out.println(username + "==" + password);
         User user = (User) userService.loadUserByUsername(username);
 
-        if(user != null && (user.getUsername().equals(username)))
-        {
-            if(!passwordEncoder.matches(password, user.getPassword()))
-            {
+        if (user != null && (user.getUsername().equals(username))) {
+            if (!passwordEncoder.matches(password, user.getPassword())) {
                 throw new BadCredentialsException("Wrong password");
             }
 
             Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
 
 
-            for (Role r:
+            for (Role r :
                     user.getRoles()) {
-                System.out.println(r.getName()+"====");
+                System.out.println(r.getName() + "====");
             }
 
             System.out.println("Все норм");
             return new UsernamePasswordAuthenticationToken(user, password, authorities);
-        }
-        else
+        } else
             throw new BadCredentialsException("Username not found");
     }
 
-    public boolean supports(Class<?> arg)
-    {
+    public boolean supports(Class<?> arg) {
         return true;
     }
 }

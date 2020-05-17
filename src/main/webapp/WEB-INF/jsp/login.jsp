@@ -84,43 +84,20 @@
 </div>
 
 
-
-
 <!--===============================================================================================-->
-<%--<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>--%>
-<%--<!--===============================================================================================-->--%>
-<%--<script src="../vendor/bootstrap/js/popper.js"></script>--%>
-<%--<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>--%>
-<%--<!--===============================================================================================-->--%>
-<%--<script src="../vendor/select2/select2.min.js"></script>--%>
-<%--<!--===============================================================================================-->--%>
-<%--<script src="../vendor/tilt/tilt.jquery.min.js"></script>--%>
-<%--<script >--%>
-<%--    $('.js-tilt').tilt({--%>
-<%--        scale: 1.1--%>
-<%--    })--%>
-<%--</script>--%>
-
+<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-<%--<script src="../js/login.js"></script>--%>
+<script src="../vendor/bootstrap/js/popper.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="../vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="../vendor/tilt/tilt.jquery.min.js"></script>
+<script >
+    $('.js-tilt').tilt({
+        scale: 1.1
+    })
+</script>
 
 </body>
 </html>
-
-<%--<html>--%>
-
-<%--<head>--%>
-<%--    <title>Sing in</title>--%>
-<%--    <link rel="shortcut icon" href="../others/favicon.ico" type="image/x-icon">--%>
-<%--</head>--%>
-
-<%--<body>--%>
-<%--<font color="red">${errorMessage}</font>--%>
-<%--<form method="post">--%>
-<%--    Name : <input type="text" name="name" />--%>
-<%--    Password : <input type="password" name="password" />--%>
-<%--    <input type="submit" />--%>
-<%--</form>--%>
-<%--</body>--%>
-
-<%--</html>--%>
