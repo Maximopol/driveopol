@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/admin", "/dbtool").access("hasRole('ADMIN')")
-                .antMatchers("/disk", "/me", "/list-todos", "/welcome").access("hasRole('USER')")
+                .antMatchers( "/me", "/list-todos", "/welcome").access("hasRole('USER')")
                 .antMatchers("/", "/login", "/register").permitAll()
                 .and()
                 .exceptionHandling().accessDeniedPage("/error")

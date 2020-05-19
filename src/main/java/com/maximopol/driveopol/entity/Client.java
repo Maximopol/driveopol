@@ -1,22 +1,84 @@
 package com.maximopol.driveopol.entity;
 
-import javax.persistence.*;
+import com.maximopol.driveopol.entity.test.Role;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-/**
- *
- */
-//@Entity
-//@Table(name = "client")
-public class Client {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
+import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.util.Collection;
+import java.util.Set;
+
+@Entity
+@Table(name = "Client")
+public class Client implements UserDetails {
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "Surname")
     private String surname;
+
+    @Column(name = "Name")
     private String name;
-    private String middleName;
+
+//    @Column(name = "MiddleName")
+//    private String middleName;
+
+    @Column(name = "Email")
     private String email;
+
+    @Column(name = "Password")
+    @Size(min = 8, message = "Не меньше 8 знаков")
     private String password;
-    private String confirmPassword;
+
+    @Transient
+    private String passwordConfirm;
+
+    @Transient
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
+
+    public Client() {
+
+    }
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
     public Long getId() {
         return id;
@@ -42,13 +104,13 @@ public class Client {
         this.name = name;
     }
 
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
+//    public String getMiddleName() {
+//        return middleName;
+//    }
+//
+//    public void setMiddleName(String middleName) {
+//        this.middleName = middleName;
+//    }
 
     public String getEmail() {
         return email;
@@ -58,20 +120,16 @@ public class Client {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
+    public String getPasswordConfirm() {
+        return passwordConfirm;
     }
 
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 
     @Override
@@ -80,10 +138,17 @@ public class Client {
                 "id=" + id +
                 ", surname='" + surname + '\'' +
                 ", name='" + name + '\'' +
-                ", middleName='" + middleName + '\'' +
+//                ", middleName='" + middleName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", confirmPassword='" + confirmPassword + '\'' +
                 '}';
     }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
 }

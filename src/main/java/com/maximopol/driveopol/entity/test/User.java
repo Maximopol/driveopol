@@ -1,4 +1,4 @@
-package com.maximopol.driveopol.entity;
+package com.maximopol.driveopol.entity.test;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

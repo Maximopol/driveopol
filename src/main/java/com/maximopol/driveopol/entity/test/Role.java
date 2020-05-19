@@ -1,11 +1,10 @@
-package com.maximopol.driveopol.entity;
+package com.maximopol.driveopol.entity.test;
 
+import com.maximopol.driveopol.entity.Client;
+import com.maximopol.driveopol.entity.test.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
-import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -17,7 +16,8 @@ public class Role implements GrantedAuthority{
 
     @Transient
     @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    private Set<Client> users;
+//    private Set<User> users;
     public Role() {
     }
 
@@ -46,11 +46,11 @@ public class Role implements GrantedAuthority{
         this.name = name;
     }
 
-    public Set<User> getUsers() {
+    public Set<Client> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(Set<Client> users) {
         this.users = users;
     }
 

@@ -1,7 +1,9 @@
 package com.maximopol.driveopol.service;
 
+import com.maximopol.driveopol.entity.Client;
 import com.maximopol.driveopol.entity.test.Role;
 import com.maximopol.driveopol.entity.test.User;
+import com.maximopol.driveopol.repository.ClientRepository;
 import com.maximopol.driveopol.repository.RoleRepository;
 import com.maximopol.driveopol.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,21 +20,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService implements UserDetailsService {
+public class ClientService implements UserDetailsService {
     @PersistenceContext
     private EntityManager em;
     @Autowired
-    UserRepository userRepository;
+    ClientRepository userRepository;
     @Autowired
     RoleRepository roleRepository;
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-
-
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Client user = userRepository.findClientByEmail(email);
 
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
@@ -44,17 +44,17 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public User findUserById(Long userId) {
-        Optional<User> userFromDb = userRepository.findById(userId);
-        return userFromDb.orElse(new User());
+    public Client findUserById(Long userId) {
+        Optional<Client> userFromDb = userRepository.findById(userId);
+        return userFromDb.orElse(new Client());
     }
 
-    public List<User> allUsers() {
+    public List<Client> allUsers() {
         return userRepository.findAll();
     }
 
-    public boolean saveUser(User user) {
-        User userFromDB = userRepository.findByUsername(user.getUsername());
+    public boolean saveUser(Client user) {
+        Client userFromDB = userRepository.findClientByEmail(user.getEmail());
 
         if (userFromDB != null) {
             return false;
@@ -74,8 +74,8 @@ public class UserService implements UserDetailsService {
         return false;
     }
 
-    public List<User> usergtList(Long idMin) {
-        return em.createQuery("SELECT u FROM t_user u WHERE u.id > :paramId", User.class)
+    public List<Client> usergtList(Long idMin) {
+        return em.createQuery("SELECT u FROM Client u WHERE u.id > :paramId", Client.class)
                 .setParameter("paramId", idMin).getResultList();
     }
 }

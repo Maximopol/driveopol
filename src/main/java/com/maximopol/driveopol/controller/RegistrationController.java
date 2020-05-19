@@ -1,8 +1,9 @@
 package com.maximopol.driveopol.controller;
 
 import com.maximopol.driveopol.entity.Client;
-import com.maximopol.driveopol.entity.Role;
-import com.maximopol.driveopol.entity.User;
+import com.maximopol.driveopol.entity.test.Role;
+import com.maximopol.driveopol.entity.test.User;
+import com.maximopol.driveopol.service.ClientService;
 import com.maximopol.driveopol.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.Valid;
 import java.util.HashSet;
-import java.util.Set;
 
 /**
  *
@@ -23,15 +22,15 @@ import java.util.Set;
 public class RegistrationController {
 
     @Autowired
-    private UserService userService;
-
+//    private UserService userService;
+    private ClientService userService;
     /**
      * @param model
      * @return
      */
     @GetMapping("/registration")
     public String registration(Model model) {
-        model.addAttribute("userForm", new User());
+        model.addAttribute("userForm", new Client());
 
         return "registration";
     }
@@ -53,24 +52,22 @@ public class RegistrationController {
 
         System.out.println(client.toString());
 
+        System.out.println(client.getPassword());
+        System.out.println(client.getPasswordConfirm());
 
-        if (!client.getPassword().equals(client.getConfirmPassword())) {
+        if (!client.getPassword().equals(client.getPasswordConfirm())) {
+
             model.addAttribute("passwordError", "Пароли не совпадают");
             return "registration";
         }
-        System.out.println("Слава украины");
-        User user = new User();
-        user.setUsername(client.getEmail());
-        user.setPassword(client.getPassword());
-        user.setPasswordConfirm(client.getConfirmPassword());
-        Role role = new Role();
-        role.setName("USER");
-        HashSet<Role> set = new HashSet<>();
-        set.add(role);
+//        System.out.println("Слава украины");
+//        User user = new User();
+//        user.setUsername(client.getEmail());
+//        user.setPassword(client.getPassword());
+//        user.setPasswordConfirm(client.getConfirmPassword());
 
-        user.setRoles(set);
         System.out.println("Лул");
-        if (!userService.saveUser(user)) {
+        if (!userService.saveUser(client)) {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
 
             return "registration";
