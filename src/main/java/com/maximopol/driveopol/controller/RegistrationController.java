@@ -1,10 +1,7 @@
 package com.maximopol.driveopol.controller;
 
 import com.maximopol.driveopol.entity.Client;
-import com.maximopol.driveopol.entity.test.Role;
-import com.maximopol.driveopol.entity.test.User;
 import com.maximopol.driveopol.service.ClientService;
-import com.maximopol.driveopol.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.HashSet;
 
 /**
  *
@@ -32,7 +27,7 @@ public class RegistrationController {
     public String registration(Model model) {
         model.addAttribute("userForm", new Client());
 
-        return "registration";
+        return "public/registration";
     }
 
 
@@ -41,7 +36,7 @@ public class RegistrationController {
 //    public String addUser(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "registration";
+            return "public/registration";
         }
 //        if(!EmailValidator.IsValidEmail(userForm.getUsername())){
 //            model.addAttribute("passwordError", "У тебя почта странная");
@@ -58,7 +53,7 @@ public class RegistrationController {
         if (!client.getPassword().equals(client.getPasswordConfirm())) {
 
             model.addAttribute("passwordError", "Пароли не совпадают");
-            return "registration";
+            return "public/registration";
         }
 //        System.out.println("Слава украины");
 //        User user = new User();
@@ -70,9 +65,9 @@ public class RegistrationController {
         if (!userService.saveUser(client)) {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
 
-            return "registration";
+            return "public/registration";
         }
         System.out.println("ГЫЫЫЫЫЫЫЫ");
-        return "redirect:/login";
+        return "public/login";
     }
 }

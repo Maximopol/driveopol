@@ -2,7 +2,6 @@ package com.maximopol.driveopol.service;
 
 import com.maximopol.driveopol.entity.Client;
 import com.maximopol.driveopol.entity.test.Role;
-import com.maximopol.driveopol.entity.test.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -14,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.HashSet;
 
 @Component
 public class AuthProvider implements AuthenticationProvider {
@@ -38,7 +37,11 @@ public class AuthProvider implements AuthenticationProvider {
 
 
             if (user.getRoles() == null) {
-                user.setRoles(Collections.singleton(new Role(1L, "USER")));
+                HashSet<Role> hashSet= new HashSet<>();
+                hashSet.add(new Role(1L, "ROLE_ADMIN"));
+                hashSet.add(new Role(2L, "ROLE_USER"));
+                user.setRoles(hashSet);
+              //  user.setRoles(Collections.singleton(new Role(1L, "ROLE_ADMIN")));
             }
             for (Role r : user.getRoles()) {
                 System.out.println(r.getName() + "====");

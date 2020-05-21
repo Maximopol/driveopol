@@ -1,7 +1,6 @@
 package com.maximopol.driveopol.entity.test;
 
 import com.maximopol.driveopol.entity.Client;
-import com.maximopol.driveopol.entity.test.User;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
