@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <html>
@@ -39,11 +40,12 @@
 
 
 
-<%--    <div>--%>
-<%--         <c:forEach var="user" items="${userss}">--%>
-<%--            <p>${user}</p>--%>
-<%--         </c:forEach>--%>
-<%--    </div>--%>
+    <div>
+        <c:forEach var="entry" items="${userMap}">
+            User ID: <c:out value="${entry.key}"/>
+            Similarity: <c:out value="${entry.value}"/>
+        </c:forEach>
+    </div>
 
 
 <div>

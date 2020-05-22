@@ -11,6 +11,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 @Controller
 public class AccountController {
     @Autowired
@@ -28,6 +32,17 @@ public class AccountController {
         model.put("surname", user.getUsername());
         model.put("email", user.getEmail());
 
+        Map<String, String> userMap = new HashMap<String, String>();
+
+        int kek = new Random().nextInt(10);
+        for(int i=0;i<kek;i++){
+            userMap.put(i+"",i+"kjk");
+        }
+//        for (User user : users) {
+//            userMap.put(user, calculateSililarity.calculate(sessionUser.getUserId(), user.getUserId()));
+//        }
+
+        model.addAttribute("userMap", userMap);
 //        model.put("userss", new String[]{"Tom", "Bob", "Sam"});
 
         return "me";
