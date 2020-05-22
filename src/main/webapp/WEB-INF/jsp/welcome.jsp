@@ -7,7 +7,17 @@
 </head>
 
 <body>
+<jsp:include page="header.jsp" />
 Welcome ${name}!!
+
+сначало тут описание барбешопа
+потом наши умные мастеры
+
+потом адрес
+
+и футер
+
+<jsp:include page="footer.jsp" />
 </body>
 
 </html>

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class WelcomeController {
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     @PreAuthorize("hasRole('USER')")
-
     public String showLoginPage(ModelMap model) {
         System.out.println("welcome to home");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
