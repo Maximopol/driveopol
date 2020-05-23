@@ -10,15 +10,28 @@
 <body>
 <jsp:include page="header.jsp" />
 <div class="limiter">
-    Парикмахерские услуги
     <div class="tableService">
-        <c:forEach var="service" items="${services}">
-            Name: <c:out value="${service.value.name}"/>
-            Description: <c:out value="${service.value.description}"/>
-            Price: <c:out value="${service.value.price}"/>
-        </c:forEach>
-    </div>
+        <table border="1">
+            <caption>Перечень доступных услуг</caption>
 
+            <tr>
+<%--                <th>Name</th>--%>
+<%--                <th>Description</th>--%>
+<%--                <th>Price</th>--%>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Цена</th>
+            </tr>
+
+            <c:forEach var="service" items="${services}">
+                <tr>
+                    <th><c:out value="${service.value.name}"/></th>
+                    <th><c:out value="${service.value.description}"/></th>
+                    <th><c:out value="${service.value.price}"/></th>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
 </div>
 <jsp:include page="footer.jsp" />
 </body>

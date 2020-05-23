@@ -19,9 +19,9 @@ public class WelcomeController {
     @PreAuthorize("hasRole('USER')")
     public String showLoginPage(ModelMap model) {
         System.out.println("welcome to home");
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        model.put("name", username);
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        String username = auth.getName();
+//        model.put("name", username);
 
 
         return "welcome";

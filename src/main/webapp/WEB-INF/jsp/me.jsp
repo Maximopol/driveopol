@@ -16,7 +16,7 @@
         Role ${role}
     </div>
 
-    <div class="buttonCreateOrder">z
+    <div class="buttonCreateOrder">
         <button >
 <%--        <button class="login100-form-btn">--%>
             Забронировать посещение

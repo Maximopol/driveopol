@@ -1,0 +1,38 @@
+.limiter{
+    position: relative;
+    top: 25px;
+    background-image: url(../others/images/ahoy.jpg);
+    min-height: 100%;
+
+
+}
+body{
+    background-image: url(../others/images/ahoy.jpg);
+    height: 100%;
+}
+
+.map{
+    position: relative;
+/*top: 500px;*/
+
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+html{
+    height: 100%;
+}
+.description{
+    background-color: #F9F7E0;
+    height: 50px;
+}
+
+.footer2{
+    position: relative;
+    /*top: 100%;*/
+}
+
+.timework{
+    position: relative;
+}
