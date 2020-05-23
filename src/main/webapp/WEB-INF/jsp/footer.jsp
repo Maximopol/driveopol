@@ -1,4 +1,6 @@
 <div>
     <link rel="stylesheet" type="text/css" href="../css/footer.css">
-    <p>Copyright ©Simon & Schuster, Inc. 2002.</p>
+    <p>Contact information: <a href="mailto:maximopolnate@gmail.com">
+        maximopolnate@gmail.com</a>.   All rights reserved.
+    </p>
 </div>

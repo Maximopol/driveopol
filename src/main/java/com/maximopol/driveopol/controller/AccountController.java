@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-@Controller
+@Controller("/account")
 public class AccountController {
     @Autowired
     private ClientService userService;
@@ -26,7 +26,7 @@ public class AccountController {
         System.out.println("welcome to home");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        Client user = (Client) userService.loadUserByUsername( auth.getName());
+        Client user = (Client) userService.loadUserByUsername(auth.getName());
 
         model.put("name", user.getName());
         model.put("surname", user.getUsername());
@@ -35,8 +35,8 @@ public class AccountController {
         Map<String, String> userMap = new HashMap<String, String>();
 
         int kek = new Random().nextInt(10);
-        for(int i=0;i<kek;i++){
-            userMap.put(i+"",i+"kjk");
+        for (int i = 0; i < kek; i++) {
+            userMap.put(i + "", i + "kjk");
         }
 //        for (User user : users) {
 //            userMap.put(user, calculateSililarity.calculate(sessionUser.getUserId(), user.getUserId()));
@@ -47,4 +47,10 @@ public class AccountController {
 
         return "me";
     }
+
+//    @RequestMapping(params = "buttonCreateOrder", method = RequestMethod.POST)
+//    public void actionRu(//@ModelAttribute Greeting greeting,
+//                         ModelMap model) {
+//        System.out.println("На меня нажали");
+//    }
 }

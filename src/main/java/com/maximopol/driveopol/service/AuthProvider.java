@@ -2,6 +2,8 @@ package com.maximopol.driveopol.service;
 
 import com.maximopol.driveopol.entity.Client;
 import com.maximopol.driveopol.entity.test.Role;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -17,8 +19,8 @@ import java.util.HashSet;
 
 @Component
 public class AuthProvider implements AuthenticationProvider {
+    private static Logger logger = LogManager.getLogger(AuthProvider.class);
     @Autowired
-//    private UserService userService;
     private ClientService userService;
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -26,33 +28,36 @@ public class AuthProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
-        System.out.println(username + "==" + password);
+        logger.info("Logged in user with mail:" + username);
+
         Client user = (Client) userService.loadUserByUsername(username);
 
         if (user != null && (user.getUsername().equals(username))) {
             if (!passwordEncoder.matches(password, user.getPassword())) {
+                logger.info("This user entered the wrong password!");
                 throw new BadCredentialsException("Wrong password");
             }
 
-
-
             if (user.getRoles() == null) {
-                HashSet<Role> hashSet= new HashSet<>();
+                HashSet<Role> hashSet = new HashSet<>();
                 hashSet.add(new Role(1L, "ROLE_ADMIN"));
                 hashSet.add(new Role(2L, "ROLE_USER"));
                 user.setRoles(hashSet);
-              //  user.setRoles(Collections.singleton(new Role(1L, "ROLE_ADMIN")));
+                //  user.setRoles(Collections.singleton(new Role(1L, "ROLE_ADMIN")));
             }
+
             for (Role r : user.getRoles()) {
-                System.out.println(r.getName() + "====");
+                   logger.info("This user has a role as "+r.getName());
             }
 
             Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
 
-            System.out.println("Все норм");
+            logger.info("User logged in");
             return new UsernamePasswordAuthenticationToken(user, password, authorities);
-        } else
+        } else {
+            logger.info("User not found");
             throw new BadCredentialsException("Username not found");
+        }
     }
 
     public boolean supports(Class<?> arg) {
