@@ -1,7 +1,9 @@
 package com.maximopol.driveopol.controller;
 
 import com.maximopol.driveopol.entity.Client;
+import com.maximopol.driveopol.entity.Employees;
 import com.maximopol.driveopol.service.ClientService;
+import com.maximopol.driveopol.service.EmployeesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -20,6 +22,9 @@ public class AccountController {
     @Autowired
     private ClientService userService;
 
+//    @Autowired
+//    private EmployeesService employeesService;
+
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     @PreAuthorize("hasRole('USER')")
     public String getMe(ModelMap model) {
@@ -27,6 +32,18 @@ public class AccountController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         Client user = (Client) userService.loadUserByUsername(auth.getName());
+//        Employees employees= employeesService.findEmployeesByIDUser(user.getId());
+//
+//        System.out.println(employees);
+//
+//
+//        Client user2= (Client)userService.loadUserByUsername("maximopolnate@gmail.com");
+//        System.out.println(user2);
+//
+//        Employees employees2= employeesService.findEmployeesByIDUser(user2.getId());
+//
+//        System.out.println(employees2);
+
 
         model.put("name", user.getName());
         model.put("surname", user.getUsername());
