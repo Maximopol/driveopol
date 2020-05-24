@@ -17,13 +17,19 @@ public class Employees {
     private String address;
 
     @Column(name = "possition")
-    private Integer position;
+    private Long position;
 
     @Column(name = "number_mobile")
     private String number_mobile;
 
     @Column(name = "experience")
     private Long experience;
+
+    @Transient
+    private Position position2;
+
+    @Transient
+    private Client me;
 
     public Employees() {
 
@@ -53,11 +59,11 @@ public class Employees {
         this.address = address;
     }
 
-    public Integer getPosition() {
+    public Long getPosition() {
         return position;
     }
 
-    public void setPosition(Integer position) {
+    public void setPosition(Long position) {
         this.position = position;
     }
 
@@ -77,6 +83,26 @@ public class Employees {
         this.experience = experience;
     }
 
+    public Position getPosition2() {
+        return position2;
+    }
+
+    public void setPosition2(Position position2) {
+        if (position2.getId().equals(position)) {
+            this.position2 = position2;
+        }
+    }
+
+    public Client getMe() {
+        return me;
+    }
+
+    public void setMe(Client me) {
+        if (me.getId().equals(person)) {
+            this.me = me;
+        }
+    }
+
     @Override
     public String toString() {
         return "Employees{" +
@@ -86,6 +112,8 @@ public class Employees {
                 ", position=" + position +
                 ", number_mobile='" + number_mobile + '\'' +
                 ", experience=" + experience +
+                ", position2=" + position2 +
+                ", me=" + me +
                 '}';
     }
 }

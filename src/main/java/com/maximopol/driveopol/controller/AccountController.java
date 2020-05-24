@@ -1,9 +1,9 @@
 package com.maximopol.driveopol.controller;
 
 import com.maximopol.driveopol.entity.Client;
-import com.maximopol.driveopol.entity.Employees;
+import com.maximopol.driveopol.entity.OrderS;
 import com.maximopol.driveopol.service.ClientService;
-import com.maximopol.driveopol.service.EmployeesService;
+import com.maximopol.driveopol.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -22,8 +23,10 @@ public class AccountController {
     @Autowired
     private ClientService userService;
 
-//    @Autowired
+    //    @Autowired
 //    private EmployeesService employeesService;
+    @Autowired
+    private OrderService orderService;
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     @PreAuthorize("hasRole('USER')")
@@ -32,6 +35,17 @@ public class AccountController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         Client user = (Client) userService.loadUserByUsername(auth.getName());
+
+        List<OrderS> list = orderService.getOrders();
+
+        Map<Long, OrderS> orderMap = new HashMap<Long, OrderS>();
+
+        for (OrderS orderS : list) {
+            if (orderS.getClient().equals(user.getId())) {
+                orderMap.put(orderS.getId(), orderS);
+            }
+        }
+        model.addAttribute("orders", orderMap);
 //        Employees employees= employeesService.findEmployeesByIDUser(user.getId());
 //
 //        System.out.println(employees);
@@ -49,17 +63,8 @@ public class AccountController {
         model.put("surname", user.getUsername());
         model.put("email", user.getEmail());
 
-        Map<String, String> userMap = new HashMap<String, String>();
 
-        int kek = new Random().nextInt(10);
-        for (int i = 0; i < kek; i++) {
-            userMap.put(i + "", i + "kjk");
-        }
-//        for (User user : users) {
-//            userMap.put(user, calculateSililarity.calculate(sessionUser.getUserId(), user.getUserId()));
-//        }
 
-        model.addAttribute("userMap", userMap);
 //        model.put("userss", new String[]{"Tom", "Bob", "Sam"});
 
         return "me";

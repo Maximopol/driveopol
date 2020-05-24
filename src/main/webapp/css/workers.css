@@ -1,26 +1,24 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-html{
-    height: 100%;
-}
-
 .limiter{
     position: relative;
     top: 25px;
+    display: flex;
+    flex-direction: column;
     min-height: 100%;
 }
-body{
+
+body {
     background-image: url(../others/images/ahoy.jpg);
     height: 100%;
 }
 
-.description{
-
+.tableService {
+    background-color: #c7c27d;
+    position: relative;
+    left: 17.5%;
+    right: -17.5%;
+    width: 65%;
 }
 
-.masters{
-
-
+table {
+    width: 100%;
 }

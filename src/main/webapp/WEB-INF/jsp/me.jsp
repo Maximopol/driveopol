@@ -31,27 +31,25 @@
     </div>
 
     <div class="buttonDeleteOrder">
-        <button >
+        <button>
             <%--        <button class="login100-form-btn">--%>
             Удалить заказ
         </button>
     </div>
 
-
-
-
     <div>
-        <c:forEach var="entry" items="${userMap}">
-            User ID: <c:out value="${entry.key}"/>
-            Similarity: <c:out value="${entry.value}"/>
+        Все ваши заказы
+        <c:forEach var="orderS" items="${orders}">
+            User ID: <c:out value="${orderS.key}"/>
+            Similarity: <c:out value="${orderS.value}"/>
         </c:forEach>
     </div>
 
 
-<div>
+    <div>
 
 
-    <jsp:include page="footer.jsp" />
+        <jsp:include page="footer.jsp"/>
 
 </body>
 
