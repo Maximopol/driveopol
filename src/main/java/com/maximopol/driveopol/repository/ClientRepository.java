@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
     Client findClientByEmail(String email);
+
+    Client findClientByNameAndSurname(String name, String surname);
 //    Client findByUsername(String email);
 //    @Query("SELECT v FROM Client v WHERE v.visitType='NEW'")
 //    List<Client> findByVisitType();

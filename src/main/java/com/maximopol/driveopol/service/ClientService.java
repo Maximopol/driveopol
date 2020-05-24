@@ -47,6 +47,10 @@ public class ClientService implements UserDetailsService {
         return userFromDb.orElse(new Client());
     }
 
+    public Client findClientByNameAndSurname(String name, String surname) {
+        return userRepository.findClientByNameAndSurname(name, surname);
+    }
+
     public List<Client> allUsers() {
         return userRepository.findAll();
     }

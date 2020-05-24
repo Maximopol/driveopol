@@ -28,6 +28,15 @@ public class OrderS {
     @Column(name = "master")
     private Long master;
 
+    @Transient
+    private OrderStatus orderStatus;
+
+    @Transient
+    private HairdressingServices hairdressingServices;
+
+    @Transient
+    private Employees employees;
+
     public OrderS() {
 
 
@@ -87,6 +96,36 @@ public class OrderS {
 
     public void setMaster(Long master) {
         this.master = master;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        if (orderStatus.getId().equals(new Integer(status.toString()))) {
+            this.orderStatus = orderStatus;
+        }
+    }
+
+    public HairdressingServices getHairdressingServices() {
+        return hairdressingServices;
+    }
+
+    public void setHairdressingServices(HairdressingServices hairdressingServices) {
+        if (hairdressingServices.getId().equals(service)) {
+            this.hairdressingServices = hairdressingServices;
+        }
+    }
+
+    public Employees getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Employees employees) {
+        if (employees.getId().equals(master)) {
+            this.employees = employees;
+        }
     }
 
     @Override

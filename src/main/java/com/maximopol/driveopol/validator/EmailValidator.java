@@ -3,6 +3,10 @@ package com.maximopol.driveopol.validator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.regex.Pattern;
 
 /**
@@ -21,8 +25,14 @@ public class EmailValidator {
     public static boolean IsValidEmail(String email) {
         return Pattern.matches(REG, email);
     }
-    public static void main(String[]args){
+    public static void main(String[]args) {
         logger.info(IsValidEmail("maximopolnate@gmail.com"));//true
         logger.info(IsValidEmail("@@@"));//true
+//        Date date = new Date();
+//        System.out.println(date);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("d-MM-yyyy");
+        Calendar calendar = new GregorianCalendar();
+        System.out.println(dateFormat.format(calendar.getTime()));
+
     }
 }

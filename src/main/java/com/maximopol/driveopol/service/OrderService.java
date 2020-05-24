@@ -27,13 +27,34 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public boolean saveOrder(OrderS orderS) {
-        OrderS orderSFromDB = orderRepository.findByClient(orderS.getClient());
+    public void updateOrder(OrderS orderS) {
+        orderRepository.save(orderS);
+    }
 
-        if (orderSFromDB != null) {
-            return false;
+    public boolean saveOrder(OrderS orderS) {
+
+        if (orderS.getId() != null) {
+            Optional<OrderS> orderS1 = orderRepository.findById(orderS.getId());
+
+            if (orderS1.isPresent()) {
+                return false;
+            }
         }
+
+//        OrderS orderSFromDB = orderRepository.(orderS.getClient());
+//
+//        if (orderSFromDB != null) {
+//            return false;
+//        }
         orderRepository.save(orderS);
         return true;
+    }
+
+    public boolean deleteOrder(Long orderId) {
+        if (orderRepository.findById(orderId).isPresent()) {
+            orderRepository.deleteById(orderId);
+            return true;
+        }
+        return false;
     }
 }
