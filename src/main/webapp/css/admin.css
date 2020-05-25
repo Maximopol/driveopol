@@ -22,3 +22,9 @@ body {
 table {
     width: 100%;
 }
+
+.me {
+
+    background-color: #c7c27d;
+    width: 250px;
+}
