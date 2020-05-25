@@ -14,12 +14,19 @@ public class OrderService {
     OrderRepository orderRepository;
 
     public OrderS findOrderByMaster(Long masterID) {
-        Optional<OrderS> userFromDb = orderRepository.findById(masterID);
-        return userFromDb.orElse(new OrderS());
+        return orderRepository.findByMaster(masterID);
+//        Optional<OrderS> userFromDb = orderRepository.findById(masterID);
+//        return userFromDb.orElse(new OrderS());
     }
 
     public OrderS findOrderByClient(Long clientrID) {
-        Optional<OrderS> userFromDb = orderRepository.findById(clientrID);
+        return orderRepository.findByClient(clientrID);
+//        Optional<OrderS> userFromDb = orderRepository.findById(clientrID);
+//        return userFromDb.orElse(new OrderS());
+    }
+
+    public OrderS findOrderByID(Long ID) {
+        Optional<OrderS> userFromDb = orderRepository.findById(ID);
         return userFromDb.orElse(new OrderS());
     }
 

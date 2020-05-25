@@ -24,6 +24,8 @@ public class AuthProvider implements AuthenticationProvider {
     private ClientService userService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private RoleService roleService;
 
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
@@ -38,16 +40,17 @@ public class AuthProvider implements AuthenticationProvider {
                 throw new BadCredentialsException("Wrong password");
             }
 
-            if (user.getRoles() == null) {
-                HashSet<Role> hashSet = new HashSet<>();
-                hashSet.add(new Role(1L, "ROLE_ADMIN"));
-                hashSet.add(new Role(2L, "ROLE_USER"));
-                user.setRoles(hashSet);
-                //  user.setRoles(Collections.singleton(new Role(1L, "ROLE_ADMIN")));
-            }
+            user.setRoles(roleService.getRoles(username));
+//            if (user.getRoles() == null) {
+//                HashSet<Role> hashSet = new HashSet<>();
+//                hashSet.add(new Role(1L, "ROLE_ADMIN"));
+//                hashSet.add(new Role(2L, "ROLE_USER"));
+//                user.setRoles(hashSet);
+//                //  user.setRoles(Collections.singleton(new Role(1L, "ROLE_ADMIN")));
+//            }
 
             for (Role r : user.getRoles()) {
-                   logger.info("This user has a role as "+r.getName());
+                logger.info("This user has a role as " + r.getName());
             }
 
             Collection<? extends GrantedAuthority> authorities = user.getAuthorities();

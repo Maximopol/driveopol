@@ -33,9 +33,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/admin", "/dbtool","/account", "/list-todos", "/welcome").access("hasRole('ADMIN')")
-                .antMatchers( "/account", "/list-todos", "/welcome").access("hasRole('USER')")
-                .antMatchers("/", "/login", "/register").permitAll()
+                .antMatchers("/admin", "/dbtool").access("hasRole('ADMIN')")
+                .antMatchers("/account", "/master").access("hasRole('MASTER')")
+                .antMatchers("/account").access("hasRole('USER')")
+                .antMatchers("/", "/welcome", "/workers", "/services", "/login", "/register").permitAll()
                 .and()
                 .exceptionHandling().accessDeniedPage("/error")
                 .and()

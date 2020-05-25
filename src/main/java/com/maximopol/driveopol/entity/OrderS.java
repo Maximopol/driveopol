@@ -37,6 +37,9 @@ public class OrderS {
     @Transient
     private Employees employees;
 
+    @Transient
+    private Client clientP;
+
     public OrderS() {
 
 
@@ -125,6 +128,16 @@ public class OrderS {
     public void setEmployees(Employees employees) {
         if (employees.getId().equals(master)) {
             this.employees = employees;
+        }
+    }
+
+    public Client getClientP() {
+        return clientP;
+    }
+
+    public void setClientP(Client clientP) {
+        if (clientP.getId().equals(client)) {
+            this.clientP = clientP;
         }
     }
 

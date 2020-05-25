@@ -13,9 +13,10 @@
 <div class="limiter">
 
     <div class="client">
-        Welcome ${surname} ${name}!!
-        Email ${email}
-        Role ${role}
+        Привет,${surname} ${name}!!<br/>
+        Ваша почта:${email}<br/>
+        Вы зашли как пользователь.<br/>
+        Теперь можете заказывать услуги :)
     </div>
 
 
@@ -109,7 +110,7 @@
 
     <div id="CreateOrder" class="modalDialog">
         <div>
-            <a href="#close" title="Закрыть" class="close">X</a>
+            <a href="${pageContext.request.contextPath}/account" title="Закрыть" class="close">X</a>
             <h3>Создание заказа</h3>
             <form class="menu" method="post" modelAttribute="Order">
                 Выберите дату: <input type="date" name="calendar">
@@ -148,14 +149,14 @@
     <%--    --%>
     <div id="ChangeOrder" class="modalDialog">
         <div>
-            <a href="#close" title="Закрыть" class="close">X</a>
+            <a href="${pageContext.request.contextPath}/account" title="Закрыть" class="close">X</a>
             <h3>Изменение заказа</h3>
             <form class="menu" method="post" modelAttribute="Order">
                 Выберите ID заказ, которого хотите изменить:
                 <select name="ordersForС">
-                    <c:forEach var="orderS" items="${orders}">
+                    <c:forEach var="orderS2" items="${orders2}">
                         <option>
-                            <c:out value="${orderS.value.id}"/>
+                            <c:out value="${orderS2.value.id}"/>
                         </option>
                     </c:forEach>
 
@@ -196,22 +197,22 @@
     <%----%>
     <div id="deleteOrder" class="modalDialog">
         <div>
-            <a href="#close" title="Закрыть" class="close">X</a>
-            <h3>Удаление заказа</h3>
+            <a href="${pageContext.request.contextPath}/account" title="Закрыть" class="close">X</a>
+            <h3>Отмена заказа</h3>
             <form class="menu" method="post" modelAttribute="Order">
-                Выберите ID заказ, которого хотите удалить:
+                Выберите ID заказ, которого хотите отменить:
 
                 <select name="ordersForDel">
-                    <c:forEach var="orderS" items="${orders}">
+                    <c:forEach var="orderS2" items="${orders2}">
                         <option>
-                            <c:out value="${orderS.value.id}"/>
+                            <c:out value="${orderS2.value.id}"/>
                         </option>
                     </c:forEach>
 
                 </select>
                 <div class="buttonDeleteOrder">
                     <button name="deleteOrder">
-                        Удалить
+                        Отменить
                     </button>
                 </div>
             </form>

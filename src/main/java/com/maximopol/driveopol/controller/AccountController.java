@@ -5,19 +5,14 @@ import com.maximopol.driveopol.entity.Employees;
 import com.maximopol.driveopol.entity.HairdressingServices;
 import com.maximopol.driveopol.entity.OrderS;
 import com.maximopol.driveopol.service.*;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,7 +44,8 @@ public class AccountController {
 
         List<OrderS> list = orderService.getOrders();
 
-        Map<Long, OrderS> orderMap = new HashMap<Long, OrderS>();
+        Map<Long, OrderS> orderMap = new HashMap<Long, OrderS>(),
+                orderMap2 = new HashMap<Long, OrderS>();
 
         for (OrderS orderS : list) {
             if (orderS.getClient().equals(user.getId())) {
@@ -60,13 +56,16 @@ public class AccountController {
                 orderS.setOrderStatus(orderStatusService.findOrderStatusByID(new Integer(orderS.getStatus().toString())));
                 //    orderS.setHairdressingServices(hairdressingServicesService.);
                 orderMap.put(orderS.getId(), orderS);
+                if (orderS.getStatus().equals(1L)) {
+                    orderMap2.put(orderS.getId(), orderS);
+                }
             }
         }
         model.addAttribute("orders", orderMap);
-
+        model.addAttribute("orders2", orderMap2);
 
         model.put("name", user.getName());
-        model.put("surname", user.getUsername());
+        model.put("surname", user.getSurname());
         model.put("email", user.getEmail());
 
         List<Employees> employeesList = employeesService.allEmployees();
@@ -79,7 +78,6 @@ public class AccountController {
         for (Employees employees : employeesList) {
             employees.setMe(userService.findUserById(employees.getPerson()));
             employees.setPosition2(positionService.findPositionByID(employees.getPosition()));
-
 
             employeesMap.put(employees.getId(), employees);
         }
@@ -170,9 +168,17 @@ public class AccountController {
 
     @RequestMapping(value = "/account", method = RequestMethod.POST, params = "deleteOrder")
     public String deleteOrder(HttpServletRequest req, HttpServletResponse res, ModelMap model) {
-        System.out.println(Arrays.toString(req.getParameterValues("ordersForDel")));
-        orderService.deleteOrder(new Long(req.getParameterValues("ordersForDel")[0]));
-        System.out.println("deleteOrder");
+
+        OrderS orderS = orderService.findOrderByID(new Long(req.getParameterValues("ordersForDel")[0]));
+        orderS.setStatus(2L);
+
+        orderService.updateOrder(orderS);
+        System.out.println(orderS);
+//        System.out.println("cancelOrder");
+//
+//        System.out.println(Arrays.toString(req.getParameterValues("ordersForDel")));
+//        orderService.deleteOrder(new Long(req.getParameterValues("ordersForDel")[0]));
+        System.out.println("cancelOrder");
         return "me";
     }
 }
