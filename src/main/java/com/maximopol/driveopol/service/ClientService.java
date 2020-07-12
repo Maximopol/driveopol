@@ -1,7 +1,7 @@
 package com.maximopol.driveopol.service;
 
 import com.maximopol.driveopol.entity.Client;
-import com.maximopol.driveopol.entity.test.Role;
+import com.maximopol.driveopol.entity.Role;
 import com.maximopol.driveopol.repository.ClientRepository;
 import com.maximopol.driveopol.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;

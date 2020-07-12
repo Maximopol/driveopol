@@ -1,6 +1,5 @@
 package com.maximopol.driveopol.entity;
 
-import com.maximopol.driveopol.entity.test.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -138,7 +137,6 @@ public class Client implements UserDetails {
                 "id=" + id +
                 ", surname='" + surname + '\'' +
                 ", name='" + name + '\'' +
-//                ", middleName='" + middleName + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
