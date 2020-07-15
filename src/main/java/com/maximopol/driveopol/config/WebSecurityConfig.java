@@ -41,16 +41,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().accessDeniedPage("/error")
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/newlogin")
              //   .loginProcessingUrl("/submit")
                 .defaultSuccessUrl("/account")
-                .failureUrl("/login?error=true")
+                .failureUrl("/newlogin?error=true")
                 .usernameParameter("email")
                 .passwordParameter("pass")
                 .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/newlogin")
                 .permitAll();
     }
     @Override
