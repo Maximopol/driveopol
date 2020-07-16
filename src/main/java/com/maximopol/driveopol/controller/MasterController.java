@@ -41,6 +41,7 @@ public class MasterController {
         System.out.println("welcome to home");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
+
         Client user = (Client) userService.loadUserByUsername(auth.getName());
 
         model.put("name", user.getName());

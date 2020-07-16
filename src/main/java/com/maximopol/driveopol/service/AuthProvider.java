@@ -40,13 +40,8 @@ public class AuthProvider implements AuthenticationProvider {
             }
 
             user.setRoles(roleService.getRoles(username));
-//            if (user.getRoles() == null) {
-//                HashSet<Role> hashSet = new HashSet<>();
-//                hashSet.add(new Role(1L, "ROLE_ADMIN"));
-//                hashSet.add(new Role(2L, "ROLE_USER"));
-//                user.setRoles(hashSet);
+
 //                //  user.setRoles(Collections.singleton(new Role(1L, "ROLE_ADMIN")));
-//            }
 
             for (Role r : user.getRoles()) {
                 logger.info("This user has a role as " + r.getName());

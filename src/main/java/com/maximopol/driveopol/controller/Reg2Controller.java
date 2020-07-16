@@ -2,70 +2,57 @@ package com.maximopol.driveopol.controller;
 
 import com.maximopol.driveopol.entity.Client;
 import com.maximopol.driveopol.service.ClientService;
+import com.maximopol.driveopol.validator.EmailValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 //lolkek4@gmail.com
 
-@Controller("/newregistration")
+@Controller("/registration")
 public class Reg2Controller {
+    private static Logger logger = LogManager.getLogger(Reg2Controller.class);
 
     @Autowired
-//    private UserService userService;
     private ClientService userService;
-    /**
-     * @param model
-     * @return
-     */
-    @GetMapping("/newregistration")
+
+    @GetMapping("/registration")
     public String registration(Model model) {
         model.addAttribute("userForm", new Client());
-
+        logger.info("Someone opened the registration page");
         return "public/reg2";
     }
 
-
-    @PostMapping("/newregistration")
+    @PostMapping("/registration")
     public String greetingSubmit(@ModelAttribute Client client, BindingResult bindingResult, Model model) {
-//    public String addUser(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model) {
-
+        String result = "";
         if (bindingResult.hasErrors()) {
             return "public/reg2";
         }
-//        if(!EmailValidator.IsValidEmail(userForm.getUsername())){
-//            model.addAttribute("passwordError", "У тебя почта странная");
-//            return "registration";
-//        }
-//        if(!userForm.)
-
-
-        System.out.println(client.toString());
-
-        System.out.println(client.getPassword());
-        System.out.println(client.getPasswordConfirm());
+        if (!EmailValidator.IsValidEmail(client.getEmail())) {
+            result = "У тебя почта странная\n";
+        }
 
         if (!client.getPassword().equals(client.getPasswordConfirm())) {
+            result += "Пароли не совпадают";
+        }
 
-            model.addAttribute("passwordError", "Пароли не совпадают");
+        if (!result.equals("")) {
+            logger.warn(result);
+            model.addAttribute("passwordError", result);
             return "public/reg2";
         }
-//        System.out.println("Слава украины");
-//        User user = new User();
-//        user.setUsername(client.getEmail());
-//        user.setPassword(client.getPassword());
-//        user.setPasswordConfirm(client.getConfirmPassword());
 
-        System.out.println("Лул");
         if (!userService.saveUser(client)) {
-            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
-
+            logger.warn("Пользователь с такой почтой уже существует!");
+            model.addAttribute("passwordError", "Пользователь с такой почтой уже существует!");
             return "public/reg2";
         }
-        System.out.println("ГЫЫЫЫЫЫЫЫ");
-        return "public/login2";
+        logger.info("New user with mail " + client.getEmail() + " added successfully");
+        return "redirect:login";
     }
 }

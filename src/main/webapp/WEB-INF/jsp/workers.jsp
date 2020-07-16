@@ -11,7 +11,7 @@
 <jsp:include page="header.jsp" />
 <div class="limiter">
     <div class="tableService">
-        <table border="1">
+        <table>
             <caption>Эти наши талантливые работники</caption>
 
             <tr>
@@ -23,7 +23,10 @@
 
             <c:forEach var="Employees" items="${employees}">
                 <tr>
-                    <th><c:out value="${Employees.value.me.surname}"/></th>
+                    <th>
+                        <a href="${pageContext.request.contextPath}/workers/${Employees.value.id}"> <c:out value="${Employees.value.me.surname}"/></a>
+<%--                        <c:out value="${Employees.value.me.surname}"/>--%>
+                    </th>
                     <th><c:out value="${Employees.value.me.surname}"/></th>
                     <th><c:out value="${Employees.value.position2.name}"/></th>
                     <th><c:out value="${Employees.value.experience}"/></th>

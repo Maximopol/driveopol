@@ -5,7 +5,7 @@
     <title>Price-list</title>
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="../others/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="../css/services.css">
+    <link rel="stylesheet" type="text/css" href="../css/workers.css">
 </head>
 <body>
 <jsp:include page="header.jsp" />

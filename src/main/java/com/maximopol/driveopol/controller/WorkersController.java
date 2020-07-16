@@ -24,6 +24,14 @@ public class WorkersController {
     @Autowired
     ClientService clientService;
 
+    @RequestMapping(value = "/workers/{$Employees.value.id}", method = RequestMethod.GET)
+    public String getWorkersByID(ModelMap model) {
+
+
+        System.out.println("123123123123");
+        return "redirect:workers";
+    }
+
     @RequestMapping(value = "/workers", method = RequestMethod.GET)
     public String getWorkers(ModelMap model) {
 
@@ -37,14 +45,6 @@ public class WorkersController {
             System.out.println(employees);
         }
         model.addAttribute("employees", employeesMap);
-//        List<HairdressingServices> list = hairdressingServicesService.allServices();
-//        Map<Long, HairdressingServices> userMap = new HashMap<Long, HairdressingServices>();
-//
-//        for (HairdressingServices hairdressingServices : list) {
-//            userMap.put(hairdressingServices.getId(), hairdressingServices);
-//        }
-//
-//        model.addAttribute("services", userMap);
 
         return "workers";
     }

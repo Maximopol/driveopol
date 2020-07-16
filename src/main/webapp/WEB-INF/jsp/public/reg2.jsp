@@ -35,6 +35,10 @@
             </div>
 
             <div>
+                ${passwordError}
+            </div>
+
+            <div>
                 <button class="login100-form-btn">
                     Create
                 </button>

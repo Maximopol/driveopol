@@ -14,17 +14,13 @@
         Привет,${surname} ${name}!!<br/>
         Ваша почта:${email}<br/>
         Вы зашли как работник.<br/>
-        ТЗдесь будет приходить новые заказы :)
+        Здесь будет приходить новые заказы :)
     </div>
 
     <div class="menu">
         <form>
             <input type="button" value="Принять заказ" onClick='location.href="#takeActualOrder"'>
         </form>
-
-        <%--        <form>--%>
-        <%--            <input type="button" value="Изменить детали заказа" onClick='location.href="#ChangeOrder"'>--%>
-        <%--        </form>--%>
     </div>
     <div class="tableService">
         <table border="1">
@@ -79,16 +75,7 @@
             </form>
         </div>
     </div>
-    <%--    --%>
-    <%--    <div id="CreateOrder" class="modalDialog">--%>
 
-
-    <%--    </div>--%>
-    <%--&lt;%&ndash;    &ndash;%&gt;--%>
-    <%--    <div id="CreateOrder" class="modalDialog">--%>
-
-
-    <%--    </div>--%>
 </div>
 
 <jsp:include page="../footer.jsp"/>

@@ -9,4 +9,10 @@ public class Review {
 //    @Column(name = "ID")
 //    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+
+    private Long ID_Order;
+
+    private Integer mark;
+
+    private String text;
 }

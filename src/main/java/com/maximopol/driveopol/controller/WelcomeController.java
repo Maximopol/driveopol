@@ -18,16 +18,12 @@ public class WelcomeController {
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     @PreAuthorize("hasRole('USER')")
     public String showLoginPage(ModelMap model) {
-        System.out.println("welcome to home");
-
         return "welcome";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     @PreAuthorize("hasRole('USER')")
     public String showWelcome(ModelMap model) {
-        System.out.println("welcome to home");
-
         return "welcome";
     }
 }

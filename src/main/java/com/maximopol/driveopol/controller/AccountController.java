@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -54,7 +55,6 @@ public class AccountController {
                 employees.setMe(userService.findUserById(employees.getPerson()));
                 orderS.setEmployees(employees);
                 orderS.setOrderStatus(orderStatusService.findOrderStatusByID(new Integer(orderS.getStatus().toString())));
-                //    orderS.setHairdressingServices(hairdressingServicesService.);
                 orderMap.put(orderS.getId(), orderS);
                 if (orderS.getStatus().equals(1L)) {
                     orderMap2.put(orderS.getId(), orderS);
@@ -121,8 +121,31 @@ public class AccountController {
         orderS.setStatus(1L);
         orderS.setDataCompletion(req.getParameterValues("calendar")[0]);
 
+        orderS.setDataCompletion(req.getParameterValues("calendar")[0]);
 
-        orderS.setDataCreated(new SimpleDateFormat("d-MM-yyyy").format(new GregorianCalendar().getTime()));
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-d");
+        orderS.setDataCreated(sdf.format(new GregorianCalendar().getTime()));
+
+
+        try {
+            Date date1 = sdf.parse(orderS.getDataCompletion());
+            Date date2 = sdf.parse(orderS.getDataCreated());
+
+            if(date1.before(date2)){
+                System.out.println(1231235457);
+                model.addAttribute("passwordError", "Выберите нормальную дату");
+                return "me";
+
+            }
+        } catch (ParseException e) {
+            model.addAttribute("passwordError", "Ошибка заказа");
+            e.printStackTrace();
+            return "me";
+        }
+
+
+
         System.out.println(orderS);
 
         orderService.saveOrder(orderS);
@@ -174,10 +197,6 @@ public class AccountController {
 
         orderService.updateOrder(orderS);
         System.out.println(orderS);
-//        System.out.println("cancelOrder");
-//
-//        System.out.println(Arrays.toString(req.getParameterValues("ordersForDel")));
-//        orderService.deleteOrder(new Long(req.getParameterValues("ordersForDel")[0]));
         System.out.println("cancelOrder");
         return "me";
     }

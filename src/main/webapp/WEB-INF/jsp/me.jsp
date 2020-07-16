@@ -19,27 +19,6 @@
         Теперь можете заказывать услуги :)
     </div>
 
-
-    <%--    <form class="menu" method="post">--%>
-    <%--        <div class="buttonCreateOrder">--%>
-    <%--            <button name="createOrder">--%>
-    <%--                Забронировать посещение--%>
-    <%--            </button>--%>
-    <%--        </div>--%>
-
-    <%--        <div class="buttonChangeOrder">--%>
-    <%--            <button name="changeOrder">--%>
-    <%--                Изменить детали заказа--%>
-    <%--            </button>--%>
-    <%--        </div>--%>
-
-    <%--        <div class="buttonDeleteOrder">--%>
-    <%--            <button name="deleteOrder">--%>
-    <%--                Удалить заказ--%>
-    <%--            </button>--%>
-    <%--        </div>--%>
-    <%--    </form>--%>
-
     <div class="menu">
         <form>
             <input type="button" value="Забронировать посещение" onClick='location.href="#CreateOrder"'>
@@ -53,9 +32,9 @@
             <input type="button" value="Удалить заказ" onClick='location.href="#deleteOrder"'>
         </form>
 
-        <%--        <form>--%>
-        <%--            <input type="button" value="Кнопка" onClick='location.href="#openModal"'>--%>
-        <%--        </form>--%>
+        <form>
+            <input type="button" value="Оставить отзыв" onClick='location.href="#"'>
+        </form>
     </div>
 
 
@@ -74,8 +53,8 @@
                 <tr>
                     <th><c:out value="${orderS.value.id}"/></th>
                     <th><c:out value="${orderS.value.hairdressingServices.name}"/></th>
-                    <th><c:out value="${orderS.value.employees.me.surname}"/> <c:out
-                            value="${orderS.value.employees.me.name}"/></th>
+                    <th><c:out value="${orderS.value.employees.me.surname}"/>
+                        <c:out value="${orderS.value.employees.me.name}"/></th>
                     <th><c:out value="${orderS.value.orderStatus.description}"/></th>
                     <th><c:out value="${orderS.value.dataCreated}"/></th>
                     <th><c:out value="${orderS.value.dataCompletion}"/></th>
@@ -83,30 +62,6 @@
             </c:forEach>
         </table>
     </div>
-
-    <%--    <div>--%>
-    <%--        Все ваши заказы--%>
-    <%--        <c:forEach var="orderS" items="${orders}">--%>
-    <%--            User ID: <c:out value="${orderS.key}"/>--%>
-    <%--            Similarity: <c:out value="${orderS.value}"/>--%>
-    <%--        </c:forEach>--%>
-    <%--    </div>--%>
-
-
-    <%--    <div id="openModal" class="modalDialog">--%>
-    <%--        <div>--%>
-    <%--            <a href="#close" title="Закрыть" class="close">X</a>--%>
-    <%--            <h2>Модальное окно</h2>--%>
-    <%--            <p>Пример простого модального окна, которое может быть создано с использованием CSS3.</p>--%>
-    <%--            <p>Слава украины</p>--%>
-
-    <%--            <form>--%>
-    <%--                <input type="button" value="Кнопка" onClick='location.href="http://codehelper.ru/"'>--%>
-    <%--            </form>--%>
-    <%--        </div>--%>
-    <%--    </div>--%>
-
-    <%----%>
 
     <div id="CreateOrder" class="modalDialog">
         <div>
@@ -136,6 +91,9 @@
                     </c:forEach>
                 </select>
 
+                <div>
+                    ${passwordError}
+                </div>
 
                 <div class="buttonCreateOrder">
                     <button name="createOrder">

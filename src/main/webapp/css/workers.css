@@ -22,4 +22,11 @@ body {
 
 table {
     width: 100%;
+    border-collapse: collapse;
+    border: 2px solid white;
+}
+TD, TH {
+    padding: 3px;
+    border: 1px solid maroon;
+    text-align: left;
 }

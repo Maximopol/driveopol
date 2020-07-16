@@ -21,6 +21,10 @@
             </div>
 
             <div>
+                ${passwordError}
+            </div>
+
+            <div>
                 <button class="login100-form-btn">
                     Login
                 </button>
@@ -34,7 +38,7 @@
             </div>
 
             <div>
-                <a class="txt2" href="${pageContext.request.contextPath}/newregistration">
+                <a class="txt2" href="${pageContext.request.contextPath}/registration">
                     Create your Account
                 </a>
             </div>
