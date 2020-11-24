@@ -1,0 +1,38 @@
+.letter{
+    color:black;
+    font-size: 26px;
+    font-family: Calibri Light, serif;
+}
+
+.numberRed{
+    color:red;
+    font-size: 170px;
+    font-family: Tahoma, serif;
+}
+.numberGreen{
+    color:green;
+    font-size: 170px;
+    font-family: Tahoma, serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    box-sizing: border-box;
+    -ms-overflow-style: scrollbar;
+    background-color: #1d1d1d;
+}
+
+.container {
+    max-width: 1200px;
+    min-width: 390px;
+    min-height: 300px;
+    width: 390px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10%;
+    background-color: whitesmoke;
+}

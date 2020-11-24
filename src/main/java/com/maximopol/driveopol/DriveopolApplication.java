@@ -8,13 +8,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  *
  */
-@SpringBootApplication
-public class DriveopolApplication {
-    /**
-     *
-     * @param args
-     */
-	public static void main(String[] args) {
-		SpringApplication.run(DriveopolApplication.class, args);
-	}
-}
+//@SpringBootApplication
+//public class DriveopolApplication {
+//    /**
+//     *
+//     * @param args
+//     */
+//	public static void main(String[] args) {
+//		SpringApplication.run(DriveopolApplication.class, args);
+//	}
+//}
